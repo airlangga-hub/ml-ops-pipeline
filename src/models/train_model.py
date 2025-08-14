@@ -1,4 +1,3 @@
-from re import X
 import joblib
 from pipeline import create_pipeline
 import json
@@ -6,6 +5,7 @@ import yaml
 from src.utils.logger import training_logger
 import dagshub
 import mlflow
+from sklearn.metrics import r2_score, root_mean_squared_error, mean_absolute_error
 
 dagshub.init(repo_owner='airlangga-hub', repo_name='ml-ops-pipeline', mlflow=True)
 mlflow.set_tracking_uri("https://dagshub.com/airlangga-hub/ml-ops-pipeline.mlflow")
@@ -39,9 +39,22 @@ try:
 
     training_logger.info("Trained pipeline saved successfully!")
 
-    # Log the model and params
+    training_logger.info("Evaluating model on training data...")
+
+    predictions = final_pipeline.predict(X_train)
+
+    r2 = r2_score(y_train, predictions)
+    rmse = root_mean_squared_error(y_train, predictions)
+    mae = mean_absolute_error(y_train, predictions)
+
+    # Log the model, metrics and params
     mlflow.log_artifact("models/pipeline.joblib")
     mlflow.log_params(hyperparams)
+    mlflow.log_metrics({
+        "train_r2": r2,
+        "train_rmse": rmse,
+        "train_mae": mae
+    })
 
 except Exception as e:
   training_logger.error(f"Error in train_model.py: {e}")

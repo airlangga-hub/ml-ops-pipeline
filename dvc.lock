@@ -1,0 +1,119 @@
+schema: '2.0'
+stages:
+  data_preparation:
+    cmd: PYTHONPATH=. python src/data/prepare_data.py
+    deps:
+    - path: data/test.csv
+      hash: md5
+      md5: dcec4b79bf9c7317bd9e17789bf888f0
+      size: 451405
+    - path: data/train.csv
+      hash: md5
+      md5: 80ccab65fb115cbad143dbbd2bcd5577
+      size: 460676
+    - path: params.yaml
+      hash: md5
+      md5: cba04daf283d68601b67f9ca1272b1d5
+      size: 314
+    - path: src/data/prepare_data.py
+      hash: md5
+      md5: 05238dfbf3909af120510917f6ee716d
+      size: 964
+    params:
+      params.yaml:
+        selected_features:
+        - RoofMatl
+        - Condition2
+        - KitchenQual
+        - BsmtQual
+        - GrLivArea
+        - OverallQual
+        - BsmtExposure
+        - BldgType
+        - SaleType
+    outs:
+    - path: data/test_data.joblib
+      hash: md5
+      md5: deecd965035a98e2066095236569c3ee
+      size: 22511
+    - path: data/train_data.joblib
+      hash: md5
+      md5: 60fbe9700b5358e294f87877d17f7cd0
+      size: 84143
+  hyperparameter_tuning:
+    cmd: PYTHONPATH=. python src/models/tune_hyperparameters.py
+    deps:
+    - path: data/train_data.joblib
+      hash: md5
+      md5: 60fbe9700b5358e294f87877d17f7cd0
+      size: 84143
+    - path: src/models/pipeline.py
+      hash: md5
+      md5: b3984428733709d9221f50a41b637621
+      size: 901
+    - path: src/models/tune_hyperparameters.py
+      hash: md5
+      md5: e25b8e756d5ae98b081826217b8232d4
+      size: 2481
+    params:
+      params.yaml:
+        hyperparameter_tuning:
+          n_trials: 20
+          n_estimators:
+            low: 50
+            high: 1000
+          max_depth:
+            low: 3
+            high: 15
+          learning_rate:
+            low: 0.001
+            high: 0.3
+    outs:
+    - path: models/best_params.json
+      hash: md5
+      md5: fc9056519da5fbfb1625f16f8563c230
+      size: 76
+  train:
+    cmd: PYTHONPATH=. python src/models/train_model.py
+    deps:
+    - path: data/train_data.joblib
+      hash: md5
+      md5: 60fbe9700b5358e294f87877d17f7cd0
+      size: 84143
+    - path: models/best_params.json
+      hash: md5
+      md5: fc9056519da5fbfb1625f16f8563c230
+      size: 76
+    - path: src/models/pipeline.py
+      hash: md5
+      md5: b3984428733709d9221f50a41b637621
+      size: 901
+    - path: src/models/train_model.py
+      hash: md5
+      md5: 21d109e67531f37bfc0aefdfcdd18acd
+      size: 1444
+    outs:
+    - path: models/pipeline.joblib
+      hash: md5
+      md5: a1ed5385f503a4412a4620102244843f
+      size: 7272684
+  evaluate:
+    cmd: PYTHONPATH=. python src/models/evaluate_model.py
+    deps:
+    - path: data/test_data.joblib
+      hash: md5
+      md5: deecd965035a98e2066095236569c3ee
+      size: 22511
+    - path: models/pipeline.joblib
+      hash: md5
+      md5: a1ed5385f503a4412a4620102244843f
+      size: 7272684
+    - path: src/models/evaluate_model.py
+      hash: md5
+      md5: a82e580849f9cada76dad4650140bbe8
+      size: 1432
+    outs:
+    - path: models/metrics.json
+      hash: md5
+      md5: 2e4d99c2d5224784629842f9f559b949
+      size: 68
