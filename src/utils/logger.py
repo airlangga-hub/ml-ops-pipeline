@@ -17,7 +17,7 @@ LOGGING_CONFIG = {
         "console": {
             "class": "logging.StreamHandler",
             "level": "INFO",
-            "formatter": "default",
+            "formatter": "simple",
             "stream": "ext://sys.stdout"
         },
         "file": {

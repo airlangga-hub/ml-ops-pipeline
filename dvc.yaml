@@ -9,12 +9,14 @@ stages:
     params:
       - selected_features
     outs:
-      - data/processed_data.joblib
+      - data/train_processed.joblib
+      - data/test_processed.joblib
 
   hyperparameter_tuning:
     cmd: python src/models/tune_hyperparameters.py
     deps:
-      - data/processed_data.joblib
+      - data/train_processed.joblib
+      - src/models/pipeline.py
       - src/models/tune_hyperparameters.py
     params:
       - hyperparameter_tuning
@@ -24,11 +26,10 @@ stages:
   train:
     cmd: python src/models/train_model.py
     deps:
-      - data/processed_data.joblib
       - models/best_params.json
+      - src/models/pipeline.py
       - src/models/train_model.py
-    params:
-      - xgboost.random_state
+      - data/train_processed.joblib
     outs:
       - models/pipeline.joblib
 
@@ -36,10 +37,8 @@ stages:
     cmd: python src/models/evaluate_model.py
     deps:
       - models/pipeline.joblib
-      - data/processed_data.joblib
       - src/models/evaluate_model.py
-    params:
-      - metrics
+      - data/test_processed.joblib
     metrics:
       - models/metrics.json:
           cache: false
