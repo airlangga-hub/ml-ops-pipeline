@@ -5,6 +5,11 @@ import optuna
 from sklearn.metrics import mean_absolute_error
 import json
 from pipeline import create_pipeline
+import dagshub
+import mlflow
+
+dagshub.init(repo_owner='airlangga-hub', repo_name='ml-ops-pipeline', mlflow=True)
+mlflow.set_tracking_uri("https://dagshub.com/airlangga-hub/ml-ops-pipeline.mlflow")
 
 def objective(trial):
   hyperparams = {
@@ -39,19 +44,26 @@ try:
 
   with open("params.yaml", "r") as f:
     params = yaml.safe_load(f)
-  study = optuna.create_study(direction="minimize")
-  study.optimize(objective, n_trials=params["hyperparameter_tuning"]["n_trials"])
 
-  best_params = study.best_params
+  with mlflow.start_run(run_name="hyperparameter_tuning"):
+    study = optuna.create_study(direction="minimize")
+    study.optimize(objective, n_trials=params["hyperparameter_tuning"]["n_trials"])
 
-  training_logger.info(f"Best hyperparameters found: {best_params}")
+    best_params = study.best_params
+    best_value = study.best_value
 
-  training_logger.info("Saving best parameters...")
+    # Log best parameters and metrics
+    mlflow.log_params(best_params)
+    mlflow.log_metric("best_mae", best_value)
 
-  with open("models/best_params.json", "w") as f:
-    json.dump(best_params, f)
+    training_logger.info(f"Best hyperparameters found: {best_params}\nBest MAE: {best_value:.0f}")
 
-  training_logger.info("Best parameters saved successfully!")
+    training_logger.info("Saving best parameters...")
+
+    with open("models/best_params.json", "w") as f:
+      json.dump(best_params, f)
+
+    training_logger.info("Best parameters saved successfully!")
 
 except Exception as e:
   training_logger.error(f"Error in tune_hyperparameters.py: {e}")

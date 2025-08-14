@@ -13,8 +13,11 @@ asttokens @ file:///home/conda/feedstock_root/build_artifacts/asttokens_17332504
 asyncssh==2.21.0
 atpublic==6.0.1
 attrs==25.3.0
+backoff==2.2.1
 billiard==4.2.1
 blinker==1.9.0
+boto3==1.40.10
+botocore==1.40.10
 cachetools==5.5.2
 celery==5.5.3
 certifi==2025.8.3
@@ -32,7 +35,11 @@ configobj==5.0.9
 contourpy==1.3.3
 cryptography==45.0.6
 cycler==0.12.1
+dacite==1.6.0
+dagshub==0.6.3
+dagshub-annotation-converter==0.1.12
 databricks-sdk==0.63.0
+dataclasses-json==0.6.7
 debugpy @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_6a37he2v_t/croot/debugpy_1736267437603/work
 decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1740384970518/work
 dictdiffer==0.9.0
@@ -63,6 +70,7 @@ funcy==2.0
 gitdb==4.0.12
 GitPython==3.1.45
 google-auth==2.40.3
+gql==3.5.3
 grandalf==0.8
 graphene==3.4.3
 graphql-core==3.2.6
@@ -70,6 +78,8 @@ graphql-relay==3.2.0
 gto==1.7.2
 gunicorn==23.0.0
 h11==0.16.0
+httpcore==1.0.9
+httpx==0.28.1
 hydra-core==1.3.2
 idna==3.10
 importlib_metadata @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_importlib-metadata_1747934053/work
@@ -80,14 +90,17 @@ iterative-telemetry==0.0.10
 itsdangerous==2.2.0
 jedi @ file:///home/conda/feedstock_root/build_artifacts/jedi_1733300866624/work
 Jinja2==3.1.6
+jmespath==1.0.1
 joblib==1.5.1
 jupyter_client @ file:///home/conda/feedstock_root/build_artifacts/jupyter_client_1733440914442/work
 jupyter_core @ file:///home/conda/feedstock_root/build_artifacts/jupyter_core_1748333051527/work
 kiwisolver==1.4.9
 kombu==5.5.4
+lxml==6.0.0
 Mako==1.3.10
 markdown-it-py==4.0.0
 MarkupSafe==3.0.2
+marshmallow==3.26.1
 matplotlib==3.10.5
 matplotlib-inline @ file:///home/conda/feedstock_root/build_artifacts/matplotlib-inline_1733416936468/work
 mdurl==0.1.2
@@ -95,6 +108,7 @@ mlflow==3.2.0
 mlflow-skinny==3.2.0
 mlflow-tracing==3.2.0
 multidict==6.6.4
+mypy_extensions==1.1.0
 nest_asyncio @ file:///home/conda/feedstock_root/build_artifacts/nest-asyncio_1733325553580/work
 networkx==3.5
 numpy==2.3.2
@@ -108,6 +122,7 @@ packaging @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_
 pandas==2.3.1
 parso @ file:///home/conda/feedstock_root/build_artifacts/parso_1733271261340/work
 pathspec==0.12.1
+pathvalidate==3.3.1
 pexpect @ file:///home/conda/feedstock_root/build_artifacts/pexpect_1733301927746/work
 pickleshare @ file:///home/conda/feedstock_root/build_artifacts/pickleshare_1733327343728/work
 pillow==11.3.0
@@ -134,10 +149,12 @@ pytz==2025.2
 PyYAML==6.0.2
 pyzmq @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_95lsut8ymz/croot/pyzmq_1734709560733/work
 requests==2.32.4
+requests-toolbelt==1.0.0
 rich==14.1.0
 rsa==4.9.1
 ruamel.yaml==0.18.14
 ruamel.yaml.clib==0.2.12
+s3transfer==0.13.1
 scikit-learn==1.7.1
 scipy==1.16.1
 scmrepo==3.5.2
@@ -155,12 +172,15 @@ sqltrie==0.11.2
 stack_data @ file:///home/conda/feedstock_root/build_artifacts/stack_data_1733569443808/work
 starlette==0.47.2
 tabulate==0.9.0
+tenacity==9.1.2
 threadpoolctl==3.6.0
 tomlkit==0.13.3
 tornado @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_63s3osc0_1/croot/tornado_1748956943583/work
 tqdm==4.67.1
 traitlets @ file:///home/conda/feedstock_root/build_artifacts/traitlets_1733367359838/work
+treelib==1.8.0
 typer==0.16.0
+typing-inspect==0.9.0
 typing-inspection==0.4.1
 typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_typing_extensions_1751643513/work
 tzdata==2025.2
