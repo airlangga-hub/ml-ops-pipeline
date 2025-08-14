@@ -1,0 +1,36 @@
+selected_features:
+  - RoofMatl
+  - Condition2
+  - KitchenQual
+  - BsmtQual
+  - GrLivArea
+  - OverallQual
+  - BsmtExposure
+  - BldgType
+  - SaleType
+
+xgboost:
+  random_state: 42
+  n_estimators: 100
+  max_depth: 6
+  learning_rate: 0.1
+
+hyperparameter_tuning:
+  cv: 5
+  n_trials: 20
+  param_ranges:
+    n_estimators:
+      low: 50
+      high: 300
+    max_depth:
+      low: 3
+      high: 7
+    learning_rate:
+      low: 0.01
+      high: 0.2
+
+metrics:
+  - mse
+  - r2
+  - rmse
+  - mae
