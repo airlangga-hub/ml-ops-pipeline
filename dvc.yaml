@@ -1,22 +1,20 @@
 stages:
+
   data_preparation:
     cmd: python src/data/prepare_data.py
     deps:
       - data/train.csv
+      - data/test.csv
       - src/data/prepare_data.py
     params:
       - selected_features
     outs:
-      - data/processed/X_train.csv
-      - data/processed/X_test.csv
-      - data/processed/y_train.csv
-      - data/processed/y_test.csv
+      - data/processed_data.joblib
 
   hyperparameter_tuning:
     cmd: python src/models/tune_hyperparameters.py
     deps:
-      - data/processed/X_train.csv
-      - data/processed/y_train.csv
+      - data/processed_data.joblib
       - src/models/tune_hyperparameters.py
     params:
       - hyperparameter_tuning
@@ -26,23 +24,19 @@ stages:
   train:
     cmd: python src/models/train_model.py
     deps:
-      - data/processed/X_train.csv
-      - data/processed/y_train.csv
+      - data/processed_data.joblib
       - models/best_params.json
       - src/models/train_model.py
     params:
       - xgboost.random_state
     outs:
-      - models/xgb_model.pkl
-      - models/preprocessor.pkl
+      - models/pipeline.joblib
 
   evaluate:
     cmd: python src/models/evaluate_model.py
     deps:
-      - models/xgb_model.pkl
-      - models/preprocessor.pkl
-      - data/processed/X_test.csv
-      - data/processed/y_test.csv
+      - models/pipeline.joblib
+      - data/processed_data.joblib
       - src/models/evaluate_model.py
     params:
       - metrics

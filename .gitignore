@@ -33,7 +33,7 @@ env/
 ENV/
 
 # DVC
-/data/processed/
+/data/
 /models/
 *.pkl
 .dvc/cache
