@@ -39,6 +39,7 @@ try:
   training_logger.info("Loading processed data...")
 
   X_train, y_train = joblib.load('data/train_data.joblib')
+  X_val, y_val = joblib.load('data/val_data.joblib')
 
   training_logger.info("Starting hyperparameter tuning...")
 

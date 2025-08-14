@@ -16,22 +16,22 @@ try:
 
   training_logger.info("Loading processed data...")
 
-  X_test, y_test = joblib.load('data/test_data.joblib')
+  X_val, y_val = joblib.load('data/val_data.joblib')
 
   training_logger.info("Evaluating model...")
 
   with mlflow.start_run(run_name="model_evaluation"):
-    predictions = final_pipeline.predict(X_test)
+    predictions = final_pipeline.predict(X_val)
 
-    r2 = r2_score(y_test, predictions)
-    rmse = root_mean_squared_error(y_test, predictions)
-    mae = mean_absolute_error(y_test, predictions)
+    r2 = r2_score(y_val, predictions)
+    rmse = root_mean_squared_error(y_val, predictions)
+    mae = mean_absolute_error(y_val, predictions)
 
     # Log metrics to MLflow
     mlflow.log_metrics({
-        "test_r2": r2,
-        "test_rmse": rmse,
-        "test_mae": mae
+        "val_r2": r2,
+        "val_rmse": rmse,
+        "val_mae": mae
     })
 
     training_logger.info(f"Model evaluation results - R2: {r2:.2f}, RMSE: {rmse:.0f}, MAE: {mae:.0f}")

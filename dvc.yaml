@@ -11,7 +11,7 @@ stages:
       - selected_features
     outs:
       - data/train_data.joblib
-      - data/test_data.joblib
+      - data/val_data.joblib
 
   hyperparameter_tuning:
     cmd: PYTHONPATH=. python src/models/tune_hyperparameters.py
@@ -39,7 +39,7 @@ stages:
     deps:
       - models/pipeline.joblib
       - src/models/evaluate_model.py
-      - data/test_data.joblib
+      - data/val_data.joblib
     metrics:
       - models/metrics.json:
           cache: false
