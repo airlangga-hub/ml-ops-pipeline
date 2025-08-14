@@ -1,7 +1,7 @@
 stages:
 
   data_preparation:
-    cmd: python src/data/prepare_data.py
+    cmd: PYTHONPATH=. python src/data/prepare_data.py
     deps:
       - params.yaml
       - data/train.csv
@@ -14,7 +14,7 @@ stages:
       - data/test_processed.joblib
 
   hyperparameter_tuning:
-    cmd: python src/models/tune_hyperparameters.py
+    cmd: PYTHONPATH=. python src/models/tune_hyperparameters.py
     deps:
       - data/train_processed.joblib
       - src/models/pipeline.py
@@ -25,7 +25,7 @@ stages:
       - models/best_params.json
 
   train:
-    cmd: python src/models/train_model.py
+    cmd: PYTHONPATH=. python src/models/train_model.py
     deps:
       - models/best_params.json
       - src/models/pipeline.py
@@ -35,7 +35,7 @@ stages:
       - models/pipeline.joblib
 
   evaluate:
-    cmd: python src/models/evaluate_model.py
+    cmd: PYTHONPATH=. python src/models/evaluate_model.py
     deps:
       - models/pipeline.joblib
       - src/models/evaluate_model.py

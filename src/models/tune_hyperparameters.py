@@ -1,6 +1,6 @@
 import joblib
 import yaml
-from utils.logger import training_logger
+from src.utils.logger import training_logger
 import optuna
 from sklearn.metrics import mean_absolute_error
 import json
@@ -38,7 +38,7 @@ def objective(trial):
 try:
   training_logger.info("Loading processed data...")
 
-  X_train, y_train = joblib.load('data/train_processed.joblib')
+  X_train, y_train = joblib.load('data/train_data.joblib')
 
   training_logger.info("Starting hyperparameter tuning...")
 

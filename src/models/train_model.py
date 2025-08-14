@@ -3,7 +3,7 @@ import joblib
 from pipeline import create_pipeline
 import json
 import yaml
-from utils.logger import training_logger
+from src.utils.logger import training_logger
 import dagshub
 import mlflow
 
@@ -13,7 +13,7 @@ mlflow.set_tracking_uri("https://dagshub.com/airlangga-hub/ml-ops-pipeline.mlflo
 try:
   training_logger.info("Loading processed data...")
 
-  X_train, y_train = joblib.load('data/train_processed.joblib')
+  X_train, y_train = joblib.load('data/train_data.joblib')
 
   training_logger.info("Loading best_params.json and params.yaml ...")
 

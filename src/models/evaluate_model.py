@@ -1,7 +1,7 @@
 import joblib
 import json
 from sklearn.metrics import r2_score, root_mean_squared_error, mean_absolute_error
-from utils.logger import training_logger
+from src.utils.logger import training_logger
 import dagshub
 import mlflow
 
@@ -16,7 +16,7 @@ try:
 
   training_logger.info("Loading processed data...")
 
-  X_test, y_test = joblib.load('data/test_processed.joblib')
+  X_test, y_test = joblib.load('data/test_data.joblib')
 
   training_logger.info("Evaluating model...")
 
