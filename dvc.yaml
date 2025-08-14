@@ -1,6 +1,6 @@
 stages:
 
-data_preparation:
+  data_preparation:
     cmd: python src/data/prepare_data.py
     deps:
       - params.yaml
