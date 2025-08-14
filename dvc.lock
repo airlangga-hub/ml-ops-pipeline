@@ -17,8 +17,8 @@ stages:
       size: 314
     - path: src/data/prepare_data.py
       hash: md5
-      md5: 05238dfbf3909af120510917f6ee716d
-      size: 964
+      md5: 48ccd5807ba6155ffcd52b1b03695075
+      size: 961
     params:
       params.yaml:
         selected_features:
@@ -32,14 +32,14 @@ stages:
         - BldgType
         - SaleType
     outs:
-    - path: data/test_data.joblib
-      hash: md5
-      md5: deecd965035a98e2066095236569c3ee
-      size: 22511
     - path: data/train_data.joblib
       hash: md5
       md5: 60fbe9700b5358e294f87877d17f7cd0
       size: 84143
+    - path: data/val_data.joblib
+      hash: md5
+      md5: deecd965035a98e2066095236569c3ee
+      size: 22511
   hyperparameter_tuning:
     cmd: PYTHONPATH=. python src/models/tune_hyperparameters.py
     deps:
@@ -53,8 +53,8 @@ stages:
       size: 901
     - path: src/models/tune_hyperparameters.py
       hash: md5
-      md5: e25b8e756d5ae98b081826217b8232d4
-      size: 2481
+      md5: b3ba74933b7450c220aa561716244b7d
+      size: 2534
     params:
       params.yaml:
         hyperparameter_tuning:
@@ -71,7 +71,7 @@ stages:
     outs:
     - path: models/best_params.json
       hash: md5
-      md5: fc9056519da5fbfb1625f16f8563c230
+      md5: d4095d7b556aad8aaf4435ddf3f77f3b
       size: 76
   train:
     cmd: PYTHONPATH=. python src/models/train_model.py
@@ -82,7 +82,7 @@ stages:
       size: 84143
     - path: models/best_params.json
       hash: md5
-      md5: fc9056519da5fbfb1625f16f8563c230
+      md5: d4095d7b556aad8aaf4435ddf3f77f3b
       size: 76
     - path: src/models/pipeline.py
       hash: md5
@@ -95,25 +95,25 @@ stages:
     outs:
     - path: models/pipeline.joblib
       hash: md5
-      md5: a1ed5385f503a4412a4620102244843f
-      size: 7272684
+      md5: a3e45d0fb902153613b92b9ca2a22a95
+      size: 11316588
   evaluate:
     cmd: PYTHONPATH=. python src/models/evaluate_model.py
     deps:
-    - path: data/test_data.joblib
+    - path: data/val_data.joblib
       hash: md5
       md5: deecd965035a98e2066095236569c3ee
       size: 22511
     - path: models/pipeline.joblib
       hash: md5
-      md5: a1ed5385f503a4412a4620102244843f
-      size: 7272684
+      md5: a3e45d0fb902153613b92b9ca2a22a95
+      size: 11316588
     - path: src/models/evaluate_model.py
       hash: md5
-      md5: a82e580849f9cada76dad4650140bbe8
-      size: 1432
+      md5: 378903d8860be8c6e3a793a68967d73f
+      size: 1422
     outs:
     - path: models/metrics.json
       hash: md5
-      md5: 2e4d99c2d5224784629842f9f559b949
-      size: 68
+      md5: 199d3fac89fff800ccbe6d88012f8ac7
+      size: 73

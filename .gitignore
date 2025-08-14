@@ -35,8 +35,10 @@ env/
 ENV/
 
 # DVC
-/data/
-/models/
+data/*.csv
+!data/*.dvc
+models/*.joblib
+!models/*.json
 *.pkl
 .dvc/cache
 .dvc/tmp
