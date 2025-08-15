@@ -22,9 +22,10 @@ def objective(trial):
                         params["hyperparameter_tuning"]["max_depth"]["low"],
                         params["hyperparameter_tuning"]["max_depth"]["high"]),
     "learning_rate":
-      trial.suggest_loguniform("learning_rate",
-                              params["hyperparameter_tuning"]["learning_rate"]["low"],
-                              params["hyperparameter_tuning"]["learning_rate"]["high"])
+      trial.suggest_float("learning_rate",
+                          params["hyperparameter_tuning"]["learning_rate"]["low"],
+                          params["hyperparameter_tuning"]["learning_rate"]["high"],
+                          log=True)
   }
 
   final_pipeline = create_pipeline(X_train.select_dtypes(include="number").columns.tolist(),
