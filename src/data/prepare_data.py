@@ -1,11 +1,11 @@
 import joblib
 import pandas as pd
-from src.utils.logger import training_logger
+from src.utils.logger import logger
 import yaml
 from sklearn.model_selection import train_test_split
 
 try:
-  training_logger.info("Loading data and selecting columns...")
+  logger.info("Loading data and selecting columns...")
 
   with open("params.yaml", "r") as f:
     params = yaml.safe_load(f)
@@ -13,7 +13,7 @@ try:
   # test.csv doesn't have SalePrice, so we only use train.csv for train and val
   train = pd.read_csv('./data/train.csv', usecols=params["selected_features"] + ["SalePrice"])
 
-  training_logger.info("Splitting data...")
+  logger.info("Splitting data...")
 
   X_train, X_val, y_train, y_val = train_test_split(
       train.drop("SalePrice", axis=1),
@@ -22,12 +22,12 @@ try:
       random_state=42
   )
 
-  training_logger.info("Saving data...")
+  logger.info("Saving data...")
 
   joblib.dump((X_train, y_train), 'data/train_data.joblib')
   joblib.dump((X_val, y_val), 'data/val_data.joblib')
 
-  training_logger.info("Data saved successfully!")
+  logger.info("Data saved successfully!")
 
 except Exception as e:
-  training_logger.error(f"Error in prepare_data.py: {e}")
+  logger.error(f"Error in prepare_data.py: {e}")

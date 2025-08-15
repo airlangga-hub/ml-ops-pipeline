@@ -1,6 +1,6 @@
 import joblib
 import yaml
-from src.utils.logger import training_logger
+from src.utils.logger import logger
 import optuna
 from sklearn.metrics import mean_absolute_error
 import json
@@ -36,12 +36,12 @@ def objective(trial):
   return mean_absolute_error(y_train, final_pipeline.predict(X_train))
 
 try:
-  training_logger.info("Loading processed data...")
+  logger.info("Loading processed data...")
 
   X_train, y_train = joblib.load('data/train_data.joblib')
   X_val, y_val = joblib.load('data/val_data.joblib')
 
-  training_logger.info("Starting hyperparameter tuning...")
+  logger.info("Starting hyperparameter tuning...")
 
   with open("params.yaml", "r") as f:
     params = yaml.safe_load(f)
@@ -57,14 +57,14 @@ try:
     mlflow.log_params(best_params)
     mlflow.log_metric("best_mae", best_value)
 
-    training_logger.info(f"Best hyperparameters found: {best_params}\nBest MAE: {best_value:.0f}")
+    logger.info(f"Best hyperparameters found: {best_params}\nBest MAE: {best_value:.0f}")
 
-    training_logger.info("Saving best parameters...")
+    logger.info("Saving best parameters...")
 
     with open("models/best_params.json", "w") as f:
       json.dump(best_params, f)
 
-    training_logger.info("Best parameters saved successfully!")
+    logger.info("Best parameters saved successfully!")
 
 except Exception as e:
-  training_logger.error(f"Error in tune_hyperparameters.py: {e}")
+  logger.error(f"Error in tune_hyperparameters.py: {e}")

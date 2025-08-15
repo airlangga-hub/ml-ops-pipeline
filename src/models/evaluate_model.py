@@ -1,7 +1,7 @@
 import joblib
 import json
 from sklearn.metrics import r2_score, root_mean_squared_error, mean_absolute_error
-from src.utils.logger import training_logger
+from src.utils.logger import logger
 import dagshub
 import mlflow
 
@@ -10,15 +10,15 @@ mlflow.set_tracking_uri("https://dagshub.com/airlangga-hub/ml-ops-pipeline.mlflo
 
 try:
 
-  training_logger.info("Loading trained pipeline...")
+  logger.info("Loading trained pipeline...")
 
   final_pipeline = joblib.load('models/pipeline.joblib')
 
-  training_logger.info("Loading processed data...")
+  logger.info("Loading processed data...")
 
   X_val, y_val = joblib.load('data/val_data.joblib')
 
-  training_logger.info("Evaluating model...")
+  logger.info("Evaluating model...")
 
   with mlflow.start_run(run_name="model_evaluation"):
     predictions = final_pipeline.predict(X_val)
@@ -34,14 +34,14 @@ try:
         "val_mae": mae
     })
 
-    training_logger.info(f"Model evaluation results - R2: {r2:.2f}, RMSE: {rmse:.0f}, MAE: {mae:.0f}")
+    logger.info(f"Model evaluation results - R2: {r2:.2f}, RMSE: {rmse:.0f}, MAE: {mae:.0f}")
 
-    training_logger.info("Saving evaluation metrics...")
+    logger.info("Saving evaluation metrics...")
 
     with open("models/metrics.json", "w") as f:
       json.dump({"R2": r2, "RMSE": rmse, "MAE": mae}, f)
 
-    training_logger.info("Evaluation metrics saved successfully!")
+    logger.info("Evaluation metrics saved successfully!")
 
 except Exception as e:
-  training_logger.error(f"Error in evaluate_model.py: {e}")
+  logger.error(f"Error in evaluate_model.py: {e}")

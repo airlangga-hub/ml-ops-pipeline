@@ -1,5 +1,10 @@
 import logging
 from logging.config import dictConfig
+import os
+
+LOG_DIR = os.path.join(os.getcwd(), "logs")
+
+os.makedirs(LOG_DIR, exist_ok=True)
 
 LOGGING_CONFIG = {
     "version": 1,
@@ -50,5 +55,4 @@ LOGGING_CONFIG = {
 
 dictConfig(LOGGING_CONFIG)
 
-logger = logging.getLogger("app")
-training_logger = logging.getLogger("training")
+logger = logging.getLogger(__file__)

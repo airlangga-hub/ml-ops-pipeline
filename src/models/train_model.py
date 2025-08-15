@@ -2,7 +2,7 @@ import joblib
 from pipeline import create_pipeline
 import json
 import yaml
-from src.utils.logger import training_logger
+from src.utils.logger import logger
 import dagshub
 import mlflow
 from sklearn.metrics import r2_score, root_mean_squared_error, mean_absolute_error
@@ -11,11 +11,11 @@ dagshub.init(repo_owner='airlangga-hub', repo_name='ml-ops-pipeline', mlflow=Tru
 mlflow.set_tracking_uri("https://dagshub.com/airlangga-hub/ml-ops-pipeline.mlflow")
 
 try:
-  training_logger.info("Loading processed data...")
+  logger.info("Loading processed data...")
 
   X_train, y_train = joblib.load('data/train_data.joblib')
 
-  training_logger.info("Loading best_params.json and params.yaml ...")
+  logger.info("Loading best_params.json and params.yaml ...")
 
   with open("models/best_params.json", "r") as f:
     hyperparams = json.load(f)
@@ -23,7 +23,7 @@ try:
   with open("params.yaml", "r") as f:
     params = yaml.safe_load(f)
 
-  training_logger.info("Training the pipeline...")
+  logger.info("Training the pipeline...")
 
   with mlflow.start_run(run_name="model_training"):
 
@@ -33,13 +33,13 @@ try:
 
     final_pipeline.fit(X_train, y_train)
 
-    training_logger.info("Saving trained pipeline...")
+    logger.info("Saving trained pipeline...")
 
     joblib.dump(final_pipeline, 'models/pipeline.joblib')
 
-    training_logger.info("Trained pipeline saved successfully!")
+    logger.info("Trained pipeline saved successfully!")
 
-    training_logger.info("Evaluating model on training data...")
+    logger.info("Evaluating model on training data...")
 
     predictions = final_pipeline.predict(X_train)
 
@@ -57,4 +57,4 @@ try:
     })
 
 except Exception as e:
-  training_logger.error(f"Error in train_model.py: {e}")
+  logger.error(f"Error in train_model.py: {e}")
