@@ -38,18 +38,6 @@ LOGGING_CONFIG = {
     "root": {
         "level": "INFO",
         "handlers": ["console", "file"]
-    },
-    "loggers": {
-        "app": {
-            "level": "DEBUG",
-            "handlers": ["console", "file"],
-            "propagate": False
-        },
-        "training": {
-            "level": "INFO",
-            "handlers": ["console", "file"],
-            "propagate": False
-        }
     }
 }
 

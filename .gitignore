@@ -37,21 +37,16 @@ ENV/
 # DVC
 data/*.csv
 !data/*.dvc
-models/*.joblib
-!models/*.json
 *.pkl
 .dvc/cache
 .dvc/tmp
 .dvc/plots
 
 # Logs
-*.log
-logs/
 mlruns/
 
 # Data (if you're using DVC, you might want to track these with DVC instead)
 *.csv
-*.json
 *.h5
 *.hdf5
 *.pkl
