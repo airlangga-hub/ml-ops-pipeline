@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mlops_api
+    ports:
+      - "8000:8000"
+    environment:
+      MLFLOW_TRACKING_URI: sqlite:///mlflow.db
+      DVC_HOME: /app/.dvc
+    volumes:
+      - .:/app
+    command: uvicorn src.api.app:app --host 0.0.0.0 --port 8000 --reload
+    depends_on:
+      - mlflow
+
+  mlflow:
+    image: mlflow/mlflow:2.6.0
+    container_name: mlops_mlflow
+    ports:
+      - "5000:5000"
+    environment:
+      MLFLOW_TRACKING_URI: sqlite:///mlflow.db
+    volumes:
+      - ./mlruns:/mlruns
