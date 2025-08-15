@@ -43,4 +43,4 @@ LOGGING_CONFIG = {
 
 dictConfig(LOGGING_CONFIG)
 
-logger = logging.getLogger(__file__)
+logger = logging.getLogger("logger")
