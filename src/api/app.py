@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
+import pandas as pd
 from src.utils.logger import logger
 
 app = FastAPI()
 
+pipeline = joblib.load('models/pipeline.joblib')
+
 class PredictionRequest(BaseModel):
-  # Categorical features (object type)
   Condition2: str
   BldgType: str
   RoofMatl: str
@@ -14,38 +16,36 @@ class PredictionRequest(BaseModel):
   BsmtExposure: str
   KitchenQual: str
   SaleType: str
-
-  # Numerical features (int64 type)
   OverallQual: int
   GrLivArea: int
 
   class Config:
-      # Example of valid input data
-      json_schema_extra = {
-          "example": {
-              "Condition2": "Norm",
-              "BldgType": "1Fam",
-              "RoofMatl": "CompShg",
-              "BsmtQual": "TA",
-              "BsmtExposure": "No",
-              "KitchenQual": "TA",
-              "SaleType": "WD",
-              "OverallQual": 7,
-              "GrLivArea": 1500
-          }
-      }
+    json_schema_extra = {
+        "example": {
+            "Condition2": "Norm",
+            "BldgType": "1Fam",
+            "RoofMatl": "CompShg",
+            "BsmtQual": "TA",
+            "BsmtExposure": "No",
+            "KitchenQual": "TA",
+            "SaleType": "WD",
+            "OverallQual": 7,
+            "GrLivArea": 1500
+        }
+    }
 
 @app.post("/predict")
 def predict(request: PredictionRequest):
 
-  logger.info(f"Received prediction request: {request.model_dump()}")
+  try:
+    logger.info(f"Received prediction request: {request.model_dump()}")
+    input_df = pd.DataFrame([request.model_dump()])
+    prediction = pipeline.predict(input_df)
+    result = float(prediction[0])
+    logger.info(f"Prediction result: {result}")
+    return {"prediction": result}
 
-  logger.info("Loading pipeline for inference...")
-
-  pipeline = joblib.load('models/pipeline.joblib')
-
-  prediction = pipeline.predict([request.model_dump()])
-
-  logger.info(f"Prediction result: {prediction[0]}")
-
-  return {"prediction": prediction[0]}
+  except Exception as e:
+    logger.error(f"Error occurred during prediction: {e}")
+    return {"error": str(e)}
+  

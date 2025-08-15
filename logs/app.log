@@ -154,3 +154,27 @@ Best MAE: 1790
 2025-08-15 07:21:20 - /Users/angga/Desktop/Personal PROJECTS/MLOps_pipeline/src/utils/logger.py - INFO - Model evaluation results - R2: 0.84, RMSE: 35100, MAE: 23994
 2025-08-15 07:21:20 - /Users/angga/Desktop/Personal PROJECTS/MLOps_pipeline/src/utils/logger.py - INFO - Saving evaluation metrics...
 2025-08-15 07:21:20 - /Users/angga/Desktop/Personal PROJECTS/MLOps_pipeline/src/utils/logger.py - INFO - Evaluation metrics saved successfully!
+2025-08-15 08:28:23 - logger - INFO - Received prediction request: {'Condition2': 'Norm', 'BldgType': '1Fam', 'RoofMatl': 'CompShg', 'BsmtQual': 'TA', 'BsmtExposure': 'No', 'KitchenQual': 'TA', 'SaleType': 'WD', 'OverallQual': 7, 'GrLivArea': 1500}
+2025-08-15 08:28:23 - logger - INFO - Loading pipeline for inference...
+2025-08-15 08:28:39 - logger - INFO - Received prediction request: {'Condition2': 'Norm', 'BldgType': '1Fam', 'RoofMatl': 'CompShg', 'BsmtQual': 'TA', 'BsmtExposure': 'No', 'KitchenQual': 'TA', 'SaleType': 'WD', 'OverallQual': 7, 'GrLivArea': 1500}
+2025-08-15 08:28:39 - logger - INFO - Loading pipeline for inference...
+2025-08-15 08:28:41 - logger - INFO - Received prediction request: {'Condition2': 'Norm', 'BldgType': '1Fam', 'RoofMatl': 'CompShg', 'BsmtQual': 'TA', 'BsmtExposure': 'No', 'KitchenQual': 'TA', 'SaleType': 'WD', 'OverallQual': 7, 'GrLivArea': 1500}
+2025-08-15 08:28:41 - logger - INFO - Loading pipeline for inference...
+2025-08-15 08:31:15 - logger - INFO - Received prediction request: {'Condition2': 'Norm', 'BldgType': '1Fam', 'RoofMatl': 'CompShg', 'BsmtQual': 'TA', 'BsmtExposure': 'No', 'KitchenQual': 'TA', 'SaleType': 'WD', 'OverallQual': 7, 'GrLivArea': 1500}
+2025-08-15 08:31:15 - logger - INFO - Prediction result: 160604.03125
+2025-08-15 08:31:17 - logger - INFO - Received prediction request: {'Condition2': 'Norm', 'BldgType': '1Fam', 'RoofMatl': 'CompShg', 'BsmtQual': 'TA', 'BsmtExposure': 'No', 'KitchenQual': 'TA', 'SaleType': 'WD', 'OverallQual': 7, 'GrLivArea': 1500}
+2025-08-15 08:31:17 - logger - INFO - Prediction result: 160604.03125
+2025-08-15 08:31:18 - logger - INFO - Received prediction request: {'Condition2': 'Norm', 'BldgType': '1Fam', 'RoofMatl': 'CompShg', 'BsmtQual': 'TA', 'BsmtExposure': 'No', 'KitchenQual': 'TA', 'SaleType': 'WD', 'OverallQual': 7, 'GrLivArea': 1500}
+2025-08-15 08:31:18 - logger - INFO - Prediction result: 160604.03125
+2025-08-15 08:31:29 - logger - INFO - Received prediction request: {'Condition2': 'Norm', 'BldgType': '1Fam', 'RoofMatl': 'CompShg', 'BsmtQual': 'TA', 'BsmtExposure': 'No', 'KitchenQual': 'TA', 'SaleType': 'WD', 'OverallQual': 7, 'GrLivArea': 1500}
+2025-08-15 08:31:29 - logger - INFO - Prediction result: 160604.03125
+2025-08-15 08:33:51 - logger - INFO - Received prediction request: {'Condition2': 'Norm', 'BldgType': '1Fam', 'RoofMatl': 'CompShg', 'BsmtQual': 'TA', 'BsmtExposure': 'No', 'KitchenQual': 'TA', 'SaleType': 'WD', 'OverallQual': 7, 'GrLivArea': 1500}
+2025-08-15 08:33:51 - logger - INFO - Prediction result: 160604.03125
+2025-08-15 08:39:40 - logger - INFO - Received prediction request: {'Condition2': 'Norm', 'BldgType': '1Fam', 'RoofMatl': 'CompShg', 'BsmtQual': 'TA', 'BsmtExposure': 'No', 'KitchenQual': 'TA', 'SaleType': 'WD', 'OverallQual': 7, 'GrLivArea': 1500}
+2025-08-15 08:39:40 - logger - INFO - Prediction result: 160604.03125
+2025-08-15 08:39:44 - logger - INFO - Received prediction request: {'Condition2': 'Norm', 'BldgType': '1Fam', 'RoofMatl': 'CompShg', 'BsmtQual': 'TA', 'BsmtExposure': 'No', 'KitchenQual': 'TA', 'SaleType': 'WD', 'OverallQual': 7, 'GrLivArea': 1500}
+2025-08-15 08:39:44 - logger - INFO - Prediction result: 160604.03125
+2025-08-15 08:39:45 - logger - INFO - Received prediction request: {'Condition2': 'Norm', 'BldgType': '1Fam', 'RoofMatl': 'CompShg', 'BsmtQual': 'TA', 'BsmtExposure': 'No', 'KitchenQual': 'TA', 'SaleType': 'WD', 'OverallQual': 7, 'GrLivArea': 1500}
+2025-08-15 08:39:45 - logger - INFO - Prediction result: 160604.03125
+2025-08-15 08:39:55 - logger - INFO - Received prediction request: {'Condition2': 'Norm', 'BldgType': '1Fam', 'RoofMatl': 'CompShg', 'BsmtQual': 'TA', 'BsmtExposure': 'No', 'KitchenQual': 'TA', 'SaleType': 'WD', 'OverallQual': 20, 'GrLivArea': 1500}
+2025-08-15 08:39:55 - logger - INFO - Prediction result: 238555.296875
