@@ -41,6 +41,7 @@ data/*.csv
 .dvc/cache
 .dvc/tmp
 .dvc/plots
+models/best_params.json
 
 # Logs
 mlruns/
