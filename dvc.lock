@@ -50,7 +50,7 @@ stages:
     params:
       params.yaml:
         hyperparameter_tuning:
-          n_trials: 20
+          n_trials: 15
           n_estimators:
             low: 50
             high: 1000
@@ -63,7 +63,7 @@ stages:
     outs:
     - path: models/best_params.json
       hash: md5
-      md5: 7310f07fa0b6aba16abae599d1293c44
+      md5: 7525a478a8fdeead8e2da037d17c8a73
       size: 76
   train:
     cmd: PYTHONPATH=. python src/models/train_model.py
@@ -74,7 +74,7 @@ stages:
       size: 84143
     - path: models/best_params.json
       hash: md5
-      md5: 7310f07fa0b6aba16abae599d1293c44
+      md5: 7525a478a8fdeead8e2da037d17c8a73
       size: 76
     - path: src/models/pipeline.py
       hash: md5
@@ -87,8 +87,8 @@ stages:
     outs:
     - path: models/pipeline.joblib
       hash: md5
-      md5: 8e85d2faa593f3b10fd73952e5bbf942
-      size: 10213712
+      md5: 73e2a0345b6ffd86752cb0b7cbe1bf9e
+      size: 13812307
   evaluate:
     cmd: PYTHONPATH=. python src/models/evaluate_model.py
     deps:
@@ -98,8 +98,8 @@ stages:
       size: 22511
     - path: models/pipeline.joblib
       hash: md5
-      md5: 8e85d2faa593f3b10fd73952e5bbf942
-      size: 10213712
+      md5: 73e2a0345b6ffd86752cb0b7cbe1bf9e
+      size: 13812307
     - path: src/models/evaluate_model.py
       hash: md5
       md5: d3190b0e431da0147a8a6af293b2f8d5
@@ -107,5 +107,5 @@ stages:
     outs:
     - path: models/metrics.json
       hash: md5
-      md5: ceee39515e9d7133ca38d23be470c3dd
+      md5: 84ad0485bc170c6da1712cb65bd09100
       size: 74

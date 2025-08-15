@@ -1,16 +1,15 @@
 selected_features:
-  - RoofMatl
-  - Condition2
-  - KitchenQual
-  - BsmtQual
-  - GrLivArea
-  - OverallQual
-  - BsmtExposure
-  - BldgType
-  - SaleType
-
+- RoofMatl
+- Condition2
+- KitchenQual
+- BsmtQual
+- GrLivArea
+- OverallQual
+- BsmtExposure
+- BldgType
+- SaleType
 hyperparameter_tuning:
-  n_trials: 20
+  n_trials: 15
   n_estimators:
     low: 50
     high: 1000
